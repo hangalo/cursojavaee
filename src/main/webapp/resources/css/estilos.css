@@ -1,0 +1,24 @@
+
+#contentor{height: 600px; width: 900px; border: solid #FF00CC;}
+
+#cabecalho{height: 20px; width: 95%; margin:12px auto; border: solid #CCFF88;
+           text-align: center; font-size: 1.2em; color: #99AAEE;
+}     
+
+#painel-es{
+    height: 450px; width: 15%; border: solid #000; 
+    margin-top: 6px; margin-left: 4px;
+    float: left;
+}
+
+#conteudo-central{height: 450px; width: 65%; border: solid #AA99BB;
+                  margin-top:6px; margin-left: 4px; float: left;
+}
+#painel-dr{
+    height: 450px; width: 15%; border: solid #BB99AA;
+    margin-top: 6px; margin-left: 4px;float: right;
+}
+
+#rodape{ height: 20px; width: 95%; margin: 4px auto;
+         background: #000; color: #FFF;clear:  both;
+}

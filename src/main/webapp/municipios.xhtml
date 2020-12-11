@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+            <h:panelGrid columns="2">
+            <h:outputLabel value="Municio"/>
+            <h:inputText value="#{municipioMB.municipio.nome}"/>
+            <h:outputLabel value="Provincia"/>
+            <h:selectOneMenu value="#{municipioMB.municipio.provincia}" converter="provinciaConverter">
+                <f:selectItem itemLabel="Seleccione uma provincia" noSelectionOption="true"/>
+                <f:selectItems value="#{municipioMB.provincias}" var="p" itemLabel="#{p.nome}" itemValue="#{p}"/>
+            
+            </h:selectOneMenu>
+             </h:panelGrid>
+            <h:commandButton value="Guardar" action="#{municipioMB.insert}"/>
+        </h:form>
+           
+        <f:view>
+            <h:form>
+                <h:dataTable value="#{municipioMB.municipios}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            Municipio:
+                        </f:facet>
+                        <h:outputText value="#{item.nome}"/>
+                    </h:column>
+                    
+                     <h:column>
+                        <f:facet name="header">
+                            Provincia
+                        </f:facet>
+                         <h:outputText value="#{item.provincia.nome}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Acções"/>
+                        </f:facet>
+                        
+                        <h:commandLink value="Delete" action="#{municipioMB.delete}">
+                            <f:setPropertyActionListener target="#{municipioMB.municipio}" value="#{item}"/>
+                        </h:commandLink>
+                        <h:outputLabel value="|  |"/>
+                        <h:commandLink value="Edit" action="#{municipioMB.startEdit}">
+                            <f:setPropertyActionListener target="#{municipioMB.municipio}" value="#{item}"/>
+                        </h:commandLink>
+                    </h:column>
+                    
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+         <h:form>
+            <h:outputLabel value="Municio"/>
+            <h:inputText value="#{municipioMB.municipio.nome}"/>
+            <h:outputLabel value="Provincia"/>
+            <h:selectOneMenu value="#{municipioMB.municipio.provincia}" converter="provinciaConverter">
+                <f:selectItem itemLabel="Seleccione uma provincia" noSelectionOption="true"/>
+                <f:selectItems value="#{municipioMB.provincias}" var="p" itemLabel="#{p.nome}" itemValue="#{p}"/>
+            
+            </h:selectOneMenu>
+            
+            <h:commandButton value="Guardar" action="#{municipioMB.finishEdit}"/>
+        </h:form>
+        
+    </h:body>
+</html>
+

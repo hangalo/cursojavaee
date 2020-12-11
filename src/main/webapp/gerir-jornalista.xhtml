@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Gerir Jornalista</title>
+    </h:head>
+    <h:body>
+
+
+        <h:form>
+            <h:messages showDetail="true" showSummary="true"/>
+            <h:panelGrid columns="2">
+                
+                <h:outputLabel value="Nome"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.nome}"/>
+                <h:outputLabel value="Sobrenome"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.sobrenome}"/>
+                
+                <h:outputLabel value="Casa"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.casa}"/>
+                <h:outputLabel value="Rua"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.rua}"/>
+                <h:outputLabel value="Bairro"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.bairro}"/>
+                <h:outputLabel value="Municipio"/>
+                <h:selectOneMenu value="#{jornalistaCDIBean.jornalista.municipio}" converter="municipioConverver">
+                     <f:selectItem itemLabel="Seleccione uma provincia" noSelectionOption="true"/>
+                     <f:selectItems value="#{municipioMB.municipios}" var="m" itemLabel="#{m.nome}" itemValue="#{m}"/>             
+                </h:selectOneMenu>
+                
+                
+                <h:outputLabel value="Crendenciado"/>
+                <h:selectBooleanCheckbox value="#{jornalistaCDIBean.jornalista.credenciado}"/>
+
+                <h:commandButton value="Guardar" action="#{jornalistaCDIBean.guardar}"/>
+                
+            </h:panelGrid>
+
+        </h:form>
+
+
+        <h:form>
+            <h:dataTable value="#{jornalistaCDIBean.jornalistas}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        Nome:
+                    </f:facet>
+                    <h:outputText value="#{item.nome}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Sobrenome:
+                    </f:facet>
+                    <h:outputText value="#{item.sobrenome}"/>
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">
+                        Casa
+                    </f:facet>
+                     <h:outputText value="#{item.casa}"/>
+                </h:column>
+                
+                  <h:column>
+                    <f:facet name="header">
+                        Municipio
+                    </f:facet>
+                      <h:outputText value="#{item.municipio.nome}"/>
+                </h:column>
+
+                
+
+                
+
+                
+                 <h:column>
+                    <f:facet name="header">
+                        Credenciado
+                    </f:facet>
+                     <h:outputText value="#{item.credenciado}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Operacoes"/>
+                    </f:facet>
+                    <h:commandLink value="Eliminar" action="#{jornalistaCDIBean.eliminar()}">
+                        <f:setPropertyActionListener target="#{jornalistaCDIBean.jornalista}" value="#{item}"/>
+                    </h:commandLink>
+                    <h:outputLabel value="| |"/>
+                    <h:commandLink value="Editar" action="#{jornalistaCDIBean.prepararEditar()}">
+                        <f:setPropertyActionListener target="#{jornalistaCDIBean.jornalista}" value="#{item}"/>
+                    </h:commandLink>
+                </h:column>
+
+            </h:dataTable>            
+        </h:form>
+
+
+    </h:body>
+</html>
+
