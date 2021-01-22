@@ -2,47 +2,86 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Registar Usuario</title>
-          
-        <h:outputStylesheet library="css" name="estilos.css"/>
-        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-        <h:outputScript library="js" name="jquery-3.5.1.min.js"/>
-        
+        <title>Estudo Primefaces</title>
     </h:head>
+    <f:view locale="#{gestorLingua.linguaPagina}">
     <h:body>
+        <h:outputText value="#{gestorLingua.linguaPagina}"/>
+        <h:form>
+            <h:commandButton value="Português" action="#{gestorLingua.escolherLingua('pt_PT')}"/>
+            <h:commandButton value="Inglês" action="#{gestorLingua.escolherLingua('en_BG')}"/>
+            <h:commandButton value="Espanhol" action="#{gestorLingua.escolherLingua('es_ES')}"/>
+            
+        </h:form>
+        <h:form>
+            <h:panelGrid columns="2">
+            <p:commandButton value="Nova Agencia" type="button" onclick="PF('dlgAngecia').show();"/>
+            <p:commandButton value="Novo Jornalista" type="button" onclick="PF('dlgJornalista').show();"/>
+        </h:panelGrid>
         
-        <div id="contentor">
-            <div id="painel-es">
+        </h:form>
+
+        <p:dialog header="Regista Agencia" widgetVar="dlgAngecia" showEffect="explode" hideEffect="bounce" height="400" width="500">
+            <p:panel header="Nova Agencia">
                 <h:form>
-                    <h:panelGrid columns="1">
-                    <h:link outcome="agencias" value="Agencias"/>
-                    
-                     <h:link outcome="municipios" value="Municipios"/>
-                     
-                      <h:link outcome="gerir-jornalista" value="Jornalista"/>
-                    
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Agencia"/>
+                        <h:inputText value="#{agenciaMB.agencia.nome}"/>
+                        <h:outputLabel value="Telefone"/>
+                        <h:inputText value="#{agenciaMB.agencia.telefone}"/>
+                        <h:outputLabel value="E-mail"/>
+                        <h:inputText value="#{agenciaMB.agencia.email}"/>
+
                     </h:panelGrid>
-                    
-                    
+                    <h:commandButton value="Guardar" action="#{agenciaMB.insert}"/>
                 </h:form>
-            </div> 
-            <div id="conteudo-central">
-                <div class="jumbotron text-center">
-                    <h1> Curso Jakarta Server Faces</h1>
-                    <p> Programação Web com Jakarta EE 8</p>
-                </div>
-            </div>
-            <div id="painel-dr">
-                Conteudo do painel direito
-            </div>
-            <div id="rodape">
-                Conteudo do Rodapé
-            </div>
-        </div>
+            </p:panel>
+        </p:dialog>
         
-       
+        <p:dialog header="Registo de Jornalistas" widgetVar="dlgJornalista">
+            <h:form>
+            <h:messages showDetail="true" showSummary="true"/>
+            <h:panelGrid columns="2">
+                
+                <h:outputLabel value="Nome"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.nome}"/>
+                <h:outputLabel value="Sobrenome"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.sobrenome}"/>
+                
+                <h:outputLabel value="Casa"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.casa}"/>
+                <h:outputLabel value="Rua"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.rua}"/>
+                <h:outputLabel value="Bairro"/>
+                <h:inputText value="#{jornalistaCDIBean.jornalista.bairro}"/>
+                <h:outputLabel value="Municipio"/>
+                <h:selectOneMenu value="#{jornalistaCDIBean.jornalista.municipio}" converter="municipioConverver">
+                     <f:selectItem itemLabel="Seleccione uma provincia" noSelectionOption="true"/>
+                     <f:selectItems value="#{municipioMB.municipios}" var="m" itemLabel="#{m.nome}" itemValue="#{m}"/>             
+                </h:selectOneMenu>
+                
+                
+                <h:outputLabel value="Crendenciado"/>
+                <h:selectBooleanCheckbox value="#{jornalistaCDIBean.jornalista.credenciado}"/>
+
+                <h:commandButton value="Guardar" action="#{jornalistaCDIBean.guardar}"/>
+                
+            </h:panelGrid>
+
+        </h:form>
+        </p:dialog>
+
+        <h:form>
+            <h:panelGrid columns="1">
+            <h:link outcome="gerir-jornalista" value="Jornalistas"/>
+            <h:link outcome="agencias" value="Agencias"/>
+            </h:panelGrid>
+        </h:form>
+        
     </h:body>
+        </f:view>
 </html>
 

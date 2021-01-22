@@ -12,7 +12,7 @@ import modelo.Agencia;
 public class AgenciaDAO {
 
     private String LISTA_TUDO = "SELECT * FROM agencia";
-    private String INSERT = "INSERT INTO(nome, telefone, email) agencia VALUES(?,?,?)";
+    private String INSERT = "INSERT INTO agencia (nome, telefone, email) VALUES(?,?,?)";
 
     ConexaoDB conexao = new ConexaoDB();
 
