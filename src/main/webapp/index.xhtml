@@ -9,17 +9,19 @@
     </h:head>
     <f:view locale="#{gestorLingua.linguaPagina}">
     <h:body>
-        <h:outputText value="#{gestorLingua.linguaPagina}"/>
+        
+        <h:outputText value="#{gestorLingua.linguaPagina}" style="font-size: 1.4em;"/>
         <h:form>
             <h:commandButton value="Português" action="#{gestorLingua.escolherLingua('pt_PT')}"/>
             <h:commandButton value="Inglês" action="#{gestorLingua.escolherLingua('en_BG')}"/>
             <h:commandButton value="Espanhol" action="#{gestorLingua.escolherLingua('es_ES')}"/>
+            <h:commandButton value="Italiano" action="#{gestorLingua.escolherLingua('it_IT')}"/>
             
         </h:form>
         <h:form>
             <h:panelGrid columns="2">
-            <p:commandButton value="Nova Agencia" type="button" onclick="PF('dlgAngecia').show();"/>
-            <p:commandButton value="Novo Jornalista" type="button" onclick="PF('dlgJornalista').show();"/>
+                <p:commandButton value="#{app['new-agency']}" type="button" onclick="PF('dlgAngecia').show();"/>
+                <p:commandButton value="#{app['new-jornalist']}" type="button" onclick="PF('dlgJornalista').show();"/>
         </h:panelGrid>
         
         </h:form>
@@ -46,12 +48,12 @@
             <h:messages showDetail="true" showSummary="true"/>
             <h:panelGrid columns="2">
                 
-                <h:outputLabel value="Nome"/>
+                <h:outputLabel value="#{msg['first-name']}"/>
                 <h:inputText value="#{jornalistaCDIBean.jornalista.nome}"/>
-                <h:outputLabel value="Sobrenome"/>
+                <h:outputLabel value="#{msg['last-name']}"/>
                 <h:inputText value="#{jornalistaCDIBean.jornalista.sobrenome}"/>
                 
-                <h:outputLabel value="Casa"/>
+                <h:outputLabel value="#{msg['house']}"/>
                 <h:inputText value="#{jornalistaCDIBean.jornalista.casa}"/>
                 <h:outputLabel value="Rua"/>
                 <h:inputText value="#{jornalistaCDIBean.jornalista.rua}"/>
@@ -76,8 +78,8 @@
 
         <h:form>
             <h:panelGrid columns="1">
-            <h:link outcome="gerir-jornalista" value="Jornalistas"/>
-            <h:link outcome="agencias" value="Agencias"/>
+                <h:link outcome="gerir-jornalista" value="#{app['new-jornalist']}"/>
+                <h:link outcome="agencias" value="#{app['new-agency']}"/>
             </h:panelGrid>
         </h:form>
         
